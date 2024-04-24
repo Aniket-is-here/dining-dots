@@ -15,14 +15,16 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '/public', 'index.html'));
   });
 
-const db = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '',
-    database : 'dining-dots'
-})
+
 
 app.post('/signin',(request,response) => {
+    const db = mysql.createConnection({
+        host : 'localhost',
+        user : 'root',
+        password : '',
+        database : 'dining-dots'
+    })
+    
     const sql = "SELECT * FROM users WHERE partner_id = ? AND password = ?"
 
     db.query(sql,[ request.body.id, request.body.password],(err,data)=>{
